@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  nginx:
+    build:
+      dockerfile: ./Dockerfile
+    ports:
+      - 8080:80
+    deploy:
+      mode: replicated
+      replicas: 1
+      resources:
+        limits:
+          cpus: "1"
+          memory: "100m"
+        reservations:
+          cpus: "0.5"
+          memory: "50m"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
